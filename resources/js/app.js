@@ -153,15 +153,14 @@ let actions = {
     }
 };
 
-Vue.component('login-form', require('./components/LoginForm').default);
+Vue.component('homepage-guest-section', require('./components/HomepageGuestSection').default);
 
+const homepageAuthSection = Vue.component('homepage-auth-section', require('./components/HomepageAuthSection').default);
 const userList = Vue.component('user-list', require('./components/UserList').default);
 const createUser = Vue.component('create-user', require('./components/CreateUser').default);
 const editUser = Vue.component('edit-user', require('./components/EditUser').default);
-
 const adminTodoList = Vue.component('admin-todo-list', require('./components/AdminTodoList').default);
 const createTodo = Vue.component('create-todo', require('./components/CreateTodo').default);
-
 const userTodoList = Vue.component('user-todo-list', require('./components/UserTodoList').default);
 
 const store = new Vuex.Store({
@@ -206,13 +205,19 @@ const router = new VueRouter({
             name: 'user-todos',
             path: '/todos',
             component: userTodoList,
+        },
+
+        {
+            name: 'homepage-auth-section',
+            path: '/',
+            component: homepageAuthSection
         }
     ],
     mode: 'history'
 });
 
-const appAdmin = new Vue({
-    el: '#app-admin',
+const app = new Vue({
+    el: '#app',
     router,
     store
 });

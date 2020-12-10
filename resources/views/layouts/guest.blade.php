@@ -11,14 +11,12 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-<div id="app">
-
-    @include('partials.nav-menu')
+<div id="app-guest">
 
     @yield('content')
 
 </div>
 
-<script src="{{ asset('js/app.js') }}" defer></script>
+<script src="{{ asset('js/app-guest.js') }}" defer></script>
 </body>
 </html>

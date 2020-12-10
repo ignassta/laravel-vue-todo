@@ -2,7 +2,7 @@
 
     <div class="container">
 
-        <div v-if="!secrets.length" class="row vh-100 justify-content-center align-items-center" v-bind:class="{'d-none': loggedIn}">
+        <div v-if="!secrets.length" class="row vh-100 justify-content-center align-items-center">
             <div class="col-md-6">
                 <div class="card shadow">
                     <div class="card-header">
@@ -24,13 +24,6 @@
                 </div>
             </div>
         </div>
-
-        <div class="row row vh-100 justify-content-center align-items-center d-none" v-bind:class="{'d-flex': loggedIn}">
-            <div class="col-md-6 text-center">
-                <h1>You have logged in!</h1>
-            </div>
-        </div>
-
     </div>
 
 </template>
@@ -47,16 +40,13 @@
                 }
             }
         },
-        props: {
-          loggedIn: false
-        },
         methods: {
             handleLogin() {
                 axios.get('/sanctum/csrf-cookie')
                     .then(response => {axios.post('/login', this.formData)
-                        .then(this.loggedIn = true)
+                        .then(response => {window.location = "/"})
                         .catch(error => console.log(error));
-                    });
+                    })
             }
         }
     }

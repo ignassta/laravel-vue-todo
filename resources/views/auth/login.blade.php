@@ -1,4 +1,4 @@
-@extends('layouts.logged-in')
+@extends('layouts.guest')
 
 @section('content')
 
