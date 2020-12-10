@@ -30,6 +30,9 @@
                             <router-link class="nav-link" :to="{name: 'todos'}">Todos</router-link>
                         </li>
                         <li class="nav-item">
+                            <router-link class="nav-link" :to="{name: 'create-todo'}">New todo</router-link>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link"
                                href="#"
                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">

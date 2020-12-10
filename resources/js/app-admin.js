@@ -10,8 +10,7 @@ Vue.use(VueRouter);
 let state = {
     users: [],
     user: '',
-    todos: [],
-    todo: ''
+    todos: []
 };
 
 let getters = {
@@ -23,9 +22,6 @@ let getters = {
     },
     todos(state) {
         return state.todos
-    },
-    todo(state) {
-        return state.todo
     }
 };
 
@@ -52,6 +48,9 @@ let mutations = {
 
     FETCH_TODOS(state, todos) {
         return state.todos = todos;
+    },
+    STORE_TODO(state, todo) {
+        state.todos.unshift(todo);
     },
     DELETE_TODO(state, todo) {
         let index = state.todos.findIndex(item => item.id === todo.id);
@@ -118,6 +117,15 @@ let actions = {
                 console.log(error.response.data)
             })
     },
+    storeTodo({commit}, todo) {
+        axios.post('/api/admin/todo/store', todo)
+            .then(response => {
+                commit('STORE_TODO', response.data)
+            })
+            .catch(error => {
+                console.log(error.response.data)
+            })
+    },
     deleteTodo({commit}, todo) {
         axios.post('/api/admin/todo/delete/' + todo.id)
             .then(response => {
@@ -134,6 +142,7 @@ const userList = Vue.component('user-list', require('./components/UserList').def
 const createUser = Vue.component('create-user', require('./components/CreateUser').default);
 const editUser = Vue.component('edit-user', require('./components/EditUser').default);
 const adminTodoList = Vue.component('admin-todo-list', require('./components/AdminTodoList').default);
+const createTodo = Vue.component('create-todo', require('./components/CreateTodo').default);
 
 const store = new Vuex.Store({
     state,
@@ -167,6 +176,11 @@ const router = new VueRouter({
             path: '/admin/todos',
             component: adminTodoList,
         },
+        {
+            name: 'create-todo',
+            path: '/admin/create-todo',
+            component: createTodo,
+        }
     ],
     mode: 'history'
 });

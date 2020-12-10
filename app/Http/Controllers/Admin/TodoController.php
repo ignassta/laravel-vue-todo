@@ -16,25 +16,17 @@ class TodoController extends Controller
         return response()->json($todos);
     }
 
-    public function create()
-    {
-        $users = User::all();
-
-        return response()->json($users);
-    }
-
     public function store(Request $request)
     {
         $request->validate([
             'task' => 'required',
-            'user_id' => 'required',
+            'user' => 'required',
         ]);
 
         $todo = new Todo([
-            'task' => $request->get('name'),
-            'user_id' => $request->get('email'),
+            'task' => $request->get('task'),
+            'user_id' => $request->get('user'),
         ]);
-
         $todo->save();
 
         return response()->json($todo);

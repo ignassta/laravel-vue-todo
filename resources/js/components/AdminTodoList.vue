@@ -32,7 +32,7 @@
     export default {
         name: "ToDoListAdmin",
         mounted() {
-            this.$store.dispatch('fetchTodos')
+            this.$store.dispatch('fetchTodos');
         },
         methods: {
             deleteTodo(todo) {
