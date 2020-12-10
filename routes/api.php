@@ -29,3 +29,4 @@ Route::post('/admin/todo/store', [\App\Http\Controllers\Admin\TodoController::cl
 Route::post('/admin/todo/delete/{id}', [\App\Http\Controllers\Admin\TodoController::class, 'destroy']);
 
 Route::get('/todos', [\App\Http\Controllers\User\TodoController::class, 'index']);
+Route::post('/todo/update/{id}', [\App\Http\Controllers\User\TodoController::class, 'update']);

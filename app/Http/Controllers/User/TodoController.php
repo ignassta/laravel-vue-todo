@@ -17,4 +17,22 @@ class TodoController extends Controller
 
         return response()->json($todos);
     }
+
+    public function update(Request $request, $id)
+    {
+        $todo = Todo::find($id);
+
+        $status = $todo->status;
+
+        if($status <= 2) {
+            $status++;
+        } else {
+            $status = 1;
+        }
+
+        $todo->status = $status;
+        $todo->save();
+
+        return response()->json($todo);
+    }
 }

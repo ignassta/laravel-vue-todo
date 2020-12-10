@@ -24,7 +24,7 @@ class TodoFactory extends Factory
         return [
             'task' => $this->faker->text(30),
             'user_id' => rand(2,51),
-            'status' => rand(0,2),
+            'status' => 1,
         ];
     }
 }

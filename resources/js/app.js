@@ -38,7 +38,7 @@ let mutations = {
     UPDATE_USER(state, user) {
         let index = state.users.findIndex(item => item.id === user.id);
         state.users[index] = user;
-        // console.log('update ' + user)
+        // console.log('update user ' + user)
     },
     DELETE_USER(state, user) {
         let index = state.users.findIndex(item => item.id === user.id);
@@ -61,6 +61,10 @@ let mutations = {
     FETCH_USER_TODOS(state, todos) {
         return state.todos = todos;
     },
+    UPDATE_USER_TODO(state, todo) {
+        let index = state.todos.findIndex(item => item.id === todo.id);
+        state.todos[index].status = todo.status
+    }
 };
 
 let actions = {
@@ -150,7 +154,16 @@ let actions = {
             .catch(error => {
                 console.log(error.response.data)
             })
-    }
+    },
+    updateUserTodo({commit}, todo) {
+        axios.post('/api/todo/update/' + todo.id, todo)
+            .then(response => {
+                commit('UPDATE_USER_TODO', response.data)
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    },
 };
 
 Vue.component('homepage-guest-section', require('./components/HomepageGuestSection').default);
