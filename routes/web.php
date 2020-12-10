@@ -17,3 +17,14 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+
+//handle page reload
+Route::get('{any}', function () {
+
+    if (Auth::user()->role === 1) {
+        return view('admin-index');
+    }
+
+    return view('user-index');
+
+})->where('any','.*');
