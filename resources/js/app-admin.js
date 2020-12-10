@@ -21,6 +21,9 @@ let mutations = {
     FETCH_USERS(state, users) {
         return state.users = users;
     },
+    STORE_USER(state, user) {
+        state.users.unshift(user);
+    },
     DELETE_USER(state, user) {
         let index = state.users.findIndex(item => item.id === user.id);
         console.log('delete ' + user.id);
@@ -32,8 +35,16 @@ let actions = {
     fetchUsers({commit}) {
         axios.get('/api/admin/users')
             .then(response => {
-                console.log(response.data)
                 commit('FETCH_USERS', response.data)
+            })
+            .catch(error => {
+                console.log(error.response.data)
+            })
+    },
+    storeUser({commit}, user) {
+        axios.post('/api/admin/user/store', user)
+            .then(response => {
+                commit('STORE_USER', response.data)
             })
             .catch(error => {
                 console.log(error.response.data)
