@@ -20,4 +20,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/admin/users', [\App\Http\Controllers\Admin\UserController::class, 'index']);
 Route::post('/admin/user/store', [\App\Http\Controllers\Admin\UserController::class, 'store']);
+Route::get('/admin/user/edit/{id}', [\App\Http\Controllers\Admin\UserController::class, 'edit']);
+Route::post('/admin/user/update/{id}', [\App\Http\Controllers\Admin\UserController::class, 'update']);
 Route::post('/admin/user/delete/{id}', [\App\Http\Controllers\Admin\UserController::class, 'destroy']);

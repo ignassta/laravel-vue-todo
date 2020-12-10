@@ -17,6 +17,9 @@
                 <td>{{ user.name }}</td>
                 <td>{{ user.email }}</td>
                 <td>
+                    <router-link class="btn btn-secondary" :to="{ name: 'edit-user', params: {id: user.id}}">
+                        <i class="fa fa-cog"></i>
+                    </router-link>
                     <button class="btn btn-danger" @click="deleteUser(user)">
                         <i class="fa fa-trash"></i>
                     </button>

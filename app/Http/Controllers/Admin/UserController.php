@@ -48,7 +48,8 @@ class UserController extends Controller
 
         $request->validate([
             'name' => 'required',
-            'email' => 'unique:users,email'.$id,
+            'email' => 'required',
+//            'email' => 'unique:users,email'.$id,
         ]);
 
         $user->name = $request->get('name');
@@ -56,7 +57,7 @@ class UserController extends Controller
         $user->password = Hash::make($request->get('email'));
         $user->save();
 
-        return response()->json($user);
+        return response()->json($id);
     }
 
     public function destroy($id)

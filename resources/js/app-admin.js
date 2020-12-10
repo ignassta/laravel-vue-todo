@@ -8,12 +8,16 @@ Vue.use(Vuex);
 Vue.use(VueRouter);
 
 let state = {
-    users: []
+    users: [],
+    user: ''
 };
 
 let getters = {
     users(state) {
         return state.users
+    },
+    user(state) {
+        return state.user
     }
 };
 
@@ -23,6 +27,14 @@ let mutations = {
     },
     STORE_USER(state, user) {
         state.users.unshift(user);
+    },
+    EDIT_USER(state, user) {
+        return state.user = user
+    },
+    UPDATE_USER(state, user) {
+        let index = state.users.findIndex(item => item.id === user.id);
+        state.users[index] = user;
+        // console.log('update ' + user)
     },
     DELETE_USER(state, user) {
         let index = state.users.findIndex(item => item.id === user.id);
@@ -50,6 +62,25 @@ let actions = {
                 console.log(error.response.data)
             })
     },
+    editUser({commit}, userId) {
+        axios.get('/api/admin/user/edit/' + userId)
+            .then(response => {
+                commit('EDIT_USER', response.data)
+            })
+            .catch(error => {
+                console.log(error.response.data)
+            })
+    },
+    updateUser({commit}, user) {
+        axios.post('/api/admin/user/update/' + user.id, user)
+            .then(response => {
+                // console.log('update ' + response.data)
+                commit('UPDATE_USER', response.data)
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    },
     deleteUser({commit}, user) {
         axios.post('/api/admin/user/delete/' + user.id)
             .then(response => {
@@ -64,6 +95,7 @@ let actions = {
 
 const userList = Vue.component('user-list', require('./components/UserList').default);
 const createUser = Vue.component('create-user', require('./components/CreateUser').default);
+const editUser = Vue.component('edit-user', require('./components/EditUser').default);
 
 const store = new Vuex.Store({
     state,
@@ -84,7 +116,13 @@ const router = new VueRouter({
             name: 'create-user',
             path: '/admin/user/create',
             component: createUser,
-        }
+        },
+        {
+            name: 'edit-user',
+            path: '/admin/user/edit/:id',
+            component: editUser,
+            params: true
+        },
     ],
     mode: 'history',
     store
