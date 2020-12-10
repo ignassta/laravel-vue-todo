@@ -53,6 +53,11 @@ let mutations = {
     FETCH_TODOS(state, todos) {
         return state.todos = todos;
     },
+    DELETE_TODO(state, todo) {
+        let index = state.todos.findIndex(item => item.id === todo.id);
+        console.log('delete ' + todo.id);
+        state.todos.splice(index, 1)
+    }
 };
 
 let actions = {
@@ -113,6 +118,16 @@ let actions = {
                 console.log(error.response.data)
             })
     },
+    deleteTodo({commit}, todo) {
+        axios.post('/api/admin/todo/delete/' + todo.id)
+            .then(response => {
+                if (response.data === 'ok')
+                    commit('DELETE_TODO', todo)
+            })
+            .catch(error => {
+                console.log(error.response.data)
+            })
+    }
 };
 
 const userList = Vue.component('user-list', require('./components/UserList').default);

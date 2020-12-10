@@ -14,6 +14,11 @@
             <tr v-for="todo in todos">
                 <td>{{ todo.id }}</td>
                 <td>{{ todo.task }}</td>
+                <td>
+                    <button class="btn btn-danger" @click="deleteTodo(todo)">
+                        <i class="fa fa-trash"></i>
+                    </button>
+                </td>
             </tr>
             </tbody>
         </table>
