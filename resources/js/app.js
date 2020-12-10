@@ -56,7 +56,11 @@ let mutations = {
         let index = state.todos.findIndex(item => item.id === todo.id);
         console.log('delete ' + todo.id);
         state.todos.splice(index, 1)
-    }
+    },
+
+    FETCH_USER_TODOS(state, todos) {
+        return state.todos = todos;
+    },
 };
 
 let actions = {
@@ -135,14 +139,30 @@ let actions = {
             .catch(error => {
                 console.log(error.response.data)
             })
+    },
+
+    fetchUserTodos({commit}) {
+        axios.get('/api/todos')
+            .then(response => {
+                console.log(response.data);
+                commit('FETCH_USER_TODOS', response.data)
+            })
+            .catch(error => {
+                console.log(error.response.data)
+            })
     }
 };
+
+Vue.component('login-form', require('./components/LoginForm').default);
 
 const userList = Vue.component('user-list', require('./components/UserList').default);
 const createUser = Vue.component('create-user', require('./components/CreateUser').default);
 const editUser = Vue.component('edit-user', require('./components/EditUser').default);
+
 const adminTodoList = Vue.component('admin-todo-list', require('./components/AdminTodoList').default);
 const createTodo = Vue.component('create-todo', require('./components/CreateTodo').default);
+
+const userTodoList = Vue.component('user-todo-list', require('./components/UserTodoList').default);
 
 const store = new Vuex.Store({
     state,
@@ -172,7 +192,7 @@ const router = new VueRouter({
         },
 
         {
-            name: 'todos',
+            name: 'admin-todos',
             path: '/admin/todos',
             component: adminTodoList,
         },
@@ -180,6 +200,12 @@ const router = new VueRouter({
             name: 'create-todo',
             path: '/admin/create-todo',
             component: createTodo,
+        },
+
+        {
+            name: 'user-todos',
+            path: '/todos',
+            component: userTodoList,
         }
     ],
     mode: 'history'

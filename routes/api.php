@@ -27,3 +27,5 @@ Route::post('/admin/user/delete/{id}', [\App\Http\Controllers\Admin\UserControll
 Route::get('/admin/todos', [\App\Http\Controllers\Admin\TodoController::class, 'index']);
 Route::post('/admin/todo/store', [\App\Http\Controllers\Admin\TodoController::class, 'store']);
 Route::post('/admin/todo/delete/{id}', [\App\Http\Controllers\Admin\TodoController::class, 'destroy']);
+
+Route::get('/todos', [\App\Http\Controllers\User\TodoController::class, 'index']);

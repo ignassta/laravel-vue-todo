@@ -1,6 +1,8 @@
-@extends('layouts.front')
+@extends('layouts.app')
 
 @section('content')
+
+    @guest
     <section class="homepage vh-100 d-flex justify-content-center align-items-center">
         <div class="content-holder">
             <h1>ToDo list</h1>
@@ -11,4 +13,14 @@
             </div>
         </div>
     </section>
+    @endguest
+
+    @auth
+    <div class="container">
+        <div class="row">
+            <router-view></router-view>
+        </div>
+    </div>
+    @endauth
+
 @endsection

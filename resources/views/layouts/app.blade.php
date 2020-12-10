@@ -7,14 +7,18 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;700&display=swap" rel="stylesheet">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-    <div id="app-front">
+<div id="app-admin">
 
-        @yield('content')
+    @include('partials.nav-menu')
 
-    </div>
-<script src="{{ asset('js/app-front.js') }}"></script>
+    @yield('content')
+
+</div>
+
+<script src="{{ asset('js/app.js') }}" defer></script>
 </body>
 </html>
