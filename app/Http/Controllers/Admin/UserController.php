@@ -21,7 +21,7 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => 'unique:users,email',
-            'password' => 'required'
+            'password' => 'required|min:6|max:20'
         ]);
 
         $user = new User([
@@ -48,8 +48,8 @@ class UserController extends Controller
 
         $request->validate([
             'name' => 'required',
-            'email' => 'required',
-//            'email' => 'unique:users,email'.$id,
+            'email' => 'unique:users,email,'.$id,
+            'password' => 'nullable|min:6|max:20'
         ]);
 
         $user->name = $request->get('name');
@@ -57,7 +57,7 @@ class UserController extends Controller
         $user->password = Hash::make($request->get('email'));
         $user->save();
 
-        return response()->json($id);
+        return response()->json($user);
     }
 
     public function destroy($id)

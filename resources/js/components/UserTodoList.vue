@@ -7,7 +7,7 @@
                  role="alert"
                  v-for="todo in todos"
                  @click="updateUserTodo(todo)"
-                v-bind:class="getStatus(todo)">
+                 v-bind:class="getStatus(todo)">
                 <div>{{ todo.task }}</div>
                 <div></div>
             </div>
