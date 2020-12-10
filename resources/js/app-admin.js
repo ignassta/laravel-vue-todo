@@ -124,8 +124,7 @@ const router = new VueRouter({
             params: true
         },
     ],
-    mode: 'history',
-    store
+    mode: 'history'
 });
 
 const appAdmin = new Vue({
