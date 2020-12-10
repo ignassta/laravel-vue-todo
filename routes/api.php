@@ -20,3 +20,4 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/admin/users', [\App\Http\Controllers\Admin\UserController::class, 'index']);
 Route::post('/admin/user/store', [\App\Http\Controllers\Admin\UserController::class, 'store']);
+Route::post('/admin/user/delete/{id}', [\App\Http\Controllers\Admin\UserController::class, 'destroy']);
