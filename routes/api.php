@@ -23,3 +23,5 @@ Route::post('/admin/user/store', [\App\Http\Controllers\Admin\UserController::cl
 Route::get('/admin/user/edit/{id}', [\App\Http\Controllers\Admin\UserController::class, 'edit']);
 Route::post('/admin/user/update/{id}', [\App\Http\Controllers\Admin\UserController::class, 'update']);
 Route::post('/admin/user/delete/{id}', [\App\Http\Controllers\Admin\UserController::class, 'destroy']);
+
+Route::get('/admin/todos', [\App\Http\Controllers\Admin\TodoController::class, 'index']);
